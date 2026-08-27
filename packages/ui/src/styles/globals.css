@@ -1,0 +1,65 @@
+:root {
+  /* Color */
+  --bg: #0a0b0d;
+  --bg-elev: #0f1115;
+  --surface: #14171c;
+  --surface-2: #1b1f26;
+  --surface-3: #232831;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-accent: rgba(255, 91, 31, 0.35);
+  --fg: #f5f1e8;
+  --fg-muted: #a3a7b0;
+  --fg-dim: #6b7078;
+  --fg-faint: #4a4e56;
+  --accent: #ff5b1f;
+  --accent-soft: #ff7a4a;
+  --accent-glow: rgba(255, 91, 31, 0.45);
+  --mint: #7dffc4;
+  --mint-glow: rgba(125, 255, 196, 0.3);
+  --amber: #ffd166;
+  --rose: #ff5d7a;
+  --violet: #a78bfa;
+  --grid: rgba(255, 255, 255, 0.035);
+  
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-full: 999px;
+  
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui: 'Inter Tight', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
