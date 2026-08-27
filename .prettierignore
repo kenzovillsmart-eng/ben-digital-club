@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+.next/
+.storybook-static/
+.turbo/
+*.log
+.DS_Store
+.env.local
+.env.*.local
