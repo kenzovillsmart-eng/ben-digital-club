@@ -1,0 +1,111 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+#!/usr/bin/env bash set -euo pipefail echo "Creating BenDigitalClub scaffold..." mkdir -p apps/www/app apps/www/styles packages/ui/src packages/config packages/design-system/tokens .github/workflows
+
+cat > package.json <<'EOF' { "name": "ben-digital-club", "private": true, "version": "0.1.0", "license": "MIT", "workspaces": [ "apps/", "packages/" ], "scripts": { "dev": "turbo run dev --parallel", "build": "turbo run build", "lint": "turbo run lint", "test": "turbo run test" }, "devDependencies": { "turbo": "^1.11.3" } } EOF
+
+cat > pnpm-workspace.yaml <<'EOF' packages:
+
+    'apps/*'
+    'packages/*' EOF
+
+cat > turbo.json <<'EOF' { "$schema": "https://turborepo.org/schema.json", "pipeline": { "dev": { "dependsOn": ["^dev"], "cache": false }, "build": { "dependsOn": ["^build"], "outputs": ["dist/**"] }, "lint": {}, "test": {} } } EOF
+
+cat > README.md <<'EOF'
+BenDigitalClub
+
+Monorepo scaffold for the BenDigitalClub site. Port of 1-website-index.html into a Next.js app and shared UI package.
+
+Getting started
+
+    Install dependencies: pnpm install
+    Start development: pnpm dev
+
+Structure
+
+    apps/www — Next.js app (app router)
+    packages/ui — shared React components
+    packages/design-system — design tokens EOF
+
+cat > .gitignore <<'EOF'
+Node
+
+node_modules/ .pnp/ .pnpm-store/ dist/ .next/ .vscode/ .DS_Store .env.local .env.development.local .env.test.local .env.production.local EOF
+
+cat > LICENSE <<'EOF' MIT License
+
+Copyright (c) 2026 kenzovillsmart-eng
+
+Permission is hereby granted, free of charge, to any person obtaining a copy ... (standard MIT text) EOF
+apps/www
+
+cat > apps/www/package.json <<'EOF' { "name": "www", "version": "0.1.0", "private": true, "scripts": { "dev": "next dev", "build": "next build", "start": "next start", "lint": "next lint" }, "dependencies": { "next": "13.5.6", "react": "18.2.0", "react-dom": "18.2.0" } } EOF
+
+cat > apps/www/next.config.js <<'EOF' module.exports = { reactStrictMode: true, experimental: { appDir: true } } EOF
+
+cat > apps/www/tsconfig.json <<'EOF' { "extends": "../../packages/config/tsconfig.base.json", "compilerOptions": { "jsx": "react-jsx", "baseUrl": ".", "paths": { "@ben-digital-club/ui": ["../../packages/ui/src"] } } } EOF
+
+cat > apps/www/postcss.config.js <<'EOF' module.exports = { plugins: { tailwindcss: {}, autoprefixer: {} } } EOF
+
+cat > apps/www/tailwind.config.js <<'EOF' module.exports = { content: [ './app//*.{ts,tsx,js,jsx}', '../../packages/ui/src//*.{ts,tsx,js,jsx}' ], theme: { extend: {} }, plugins: [] } EOF
+
+cat > apps/www/styles/globals.css <<'EOF' @tailwind base; @tailwind components; @tailwind utilities;
+
+:root{ --bg:#0a0b0d; --bg-elev:#0f1115; --surface:#14171c; --surface-2:#1b1f26; --fg:#f5f1e8; --fg-muted:#a3a7b0; --accent:#ff5b1f; }
+
+html,body,#root{ height:100%; }
+
+body{ background:var(--bg); color:var(--fg); font-family:Inter Tight, system-ui, sans-serif; }
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+.nav{position:fixed;top:0;left:0;right:0;padding:18px 0}
+
+.hero{padding-top:140px;padding-bottom:60px;min-height:100vh;display:flex;align-items:center}
+
+.brand-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent) 0%,#ff8a5a 100%);display:grid;place-items:center;color:#1a0d05} EOF
+
+cat > apps/www/app/layout.tsx <<'EOF' export default function RootLayout({ children }: { children: React.ReactNode }) { return ( <html lang="en"> <head> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>BenDigitalClub</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" /> <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=Inter+Tight:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" /> </head> <body>{children}</body> </html> ) } EOF
+
+cat > apps/www/app/page.tsx <<'EOF' import { Header } from '@ben-digital-club/ui' import '../styles/globals.css'
+
+export default function Page() { return ( <main> <Header /> <section className="hero wrap"> <div className="hero-grid" style={{display:'grid',gridTemplateColumns:'1.05fr 1fr',gap:60,alignItems:'center'}}> <div> <div className="hero-status-pill"> <span className="pill-dot" style={{display:'inline-block',width:7,height:7,borderRadius:7,background:'#7dffc4',boxShadow:'0 0 8px #7dffc4'}}></span> <span style={{marginLeft:8,fontFamily:'JetBrains Mono, monospace',fontSize:12,color:'var(--fg-muted)'}}>v0.1 — Prototype</span> </div> <h1 style={{fontSize:'clamp(48px,7vw,96px)',marginBottom:24}}>AI-powered systems for modern digital growth</h1> <p className="lead">Build, automate, optimize and scale your content, SEO, social media and digital marketing workflows with BenDigitalClub — the production-grade reference implementation and opinionated toolkit.</p> </div> <div> <div style={{maxWidth:560,margin:'0 auto'}}> <svg viewBox="0 0 400 400" style={{width:'100%',height:'auto'}}> <defs> <linearGradient id="g" x1="0" x2="1"><stop offset="0" stopColor="#ff5b1f"/><stop offset="1" stopColor="#ff8a5a"/></linearGradient> </defs> <circle cx="200" cy="200" r="80" fill="#14171c" stroke="url(#g)" strokeWidth="2" /> </svg> </div> </div> </div> </section> </main> ) } EOF
+packages/ui
+
+cat > packages/ui/package.json <<'EOF' { "name": "@ben-digital-club/ui", "version": "0.1.0", "main": "src/index.ts", "types": "src/index.ts", "files": ["src"] } EOF
+
+cat > packages/ui/src/Header.tsx <<'EOF' import React from 'react'
+
+export const Header: React.FC = () => { return ( <nav className="nav"> <div className="wrap nav-inner" style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}> <div className="brand" style={{display:'flex',alignItems:'center',gap:10}}> <div className="brand-mark">BD</div> <div style={{fontWeight:600}}>BenDigitalClub</div> </div> <div style={{display:'flex',gap:12,alignItems:'center'}}> <a className="nav-link">Product</a> <a className="nav-link">Docs</a> <a className="nav-link">Community</a> <button className="btn btn-primary">Get started</button> </div> </div> </nav> ) } EOF
+
+cat > packages/ui/src/Hero.tsx <<'EOF' import React from 'react'
+
+export const Hero: React.FC<{title?:string,subtitle?:string}> = ({title,subtitle})=>{ return ( <section className="hero wrap"> <div className="hero-grid"> <div> <div className="hero-status-pill"><span className="pill-dot"/> <span className="v">v0.1</span></div> <h1>{title ?? 'AI-powered systems for modern digital growth'}</h1> <p className="lead">{subtitle ?? 'Build, automate, optimize and scale your content, SEO, social media and digital marketing workflows with BenDigitalClub.'}</p> </div> <div> <div className="core-viz"> <svg viewBox="0 0 400 400"> <circle cx="200" cy="200" r="80" className="core-center" /> </svg> </div> </div> </div> </section> ) } EOF
+
+cat > packages/ui/src/index.ts <<'EOF' export * from './Header' export * from './Hero' EOF
+packages/design-system tokens
+
+cat > packages/design-system/tokens/package.json <<'EOF' { "name": "@ben-digital-club/design-tokens", "version": "0.1.0", "main": "src/index.ts", "files": ["src"] } EOF
+
+cat > packages/design-system/tokens/src/tokens.css <<'EOF' :root{ --bg:#0a0b0d; --bg-elev:#0f1115; --surface:#14171c; --surface-2:#1b1f26; --surface-3:#232831; --border:rgba(255,255,255,0.07); --accent:#ff5b1f; --fg:#f5f1e8; } EOF
+
+cat > packages/design-system/tokens/src/index.ts <<'EOF' export const tokens = { colors: { bg: '#0a0b0d', surface: '#14171c', accent: '#ff5b1f', fg: '#f5f1e8' } } EOF
+packages/config
+
+cat > packages/config/tsconfig.base.json <<'EOF' { "compilerOptions": { "target": "ES2020", "module": "ESNext", "lib": ["DOM", "ES2020"], "moduleResolution": "Node", "strict": true, "esModuleInterop": true, "skipLibCheck": true, "forceConsistentCasingInFileNames": true } } EOF
+CI
+
+cat > .github/workflows/ci.yml <<'EOF' name: CI on: push: branches: [ main ] pull_request: branches: [ main ]
+
+jobs: build: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Install Node uses: actions/setup-node@v4 with: node-version: '18' cache: 'pnpm' - name: Install pnpm run: npm i -g pnpm - name: Install run: pnpm install - name: Build run: pnpm build EOF
+
+echo "Scaffold files created." echo "Next: run 'git add . && git commit -m "scaffold: initial monorepo" && git push -u origin scaffold-nextjs'"
