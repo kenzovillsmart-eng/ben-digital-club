@@ -1,0 +1,16 @@
+export const spacing = {
+  s1: '4px',
+  s2: '8px',
+  s3: '12px',
+  s4: '16px',
+  s5: '20px',
+  s6: '24px',
+  s8: '32px',
+  s10: '40px',
+  s12: '48px',
+  s16: '64px',
+  s20: '80px',
+  s24: '96px',
+  s32: '128px',
+  s40: '160px',
+};
