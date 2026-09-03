@@ -20,7 +20,7 @@
   "dependencies": {
     "@ben-digital-club/design-system": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^7.5.0",
