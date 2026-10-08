@@ -1,41 +1,27 @@
 import { Header } from "@ben-digital-club/ui";
-import { FeatureCard, Section } from "./components/site-shell";
+import { FeatureCard, Section, Hero } from "./components/site-shell";
 
 export default function Page() {
   return (
     <main>
       <Header />
 
-      <section className="hero wrap">
-        <div className="hero-copy">
-          <p className="eyebrow">BEN DIGITAL CLUB</p>
-          <h1>Build sharper ideas with better people.</h1>
-          <p className="hero-description">
-            A focused digital club for people creating meaningful products,
-            brands, and experiences.
-          </p>
-
-          <div className="hero-actions">
-            <a className="button button-primary" href="#join">
-              Join the club
-            </a>
-            <a className="button button-secondary" href="#about">
-              Learn more
-            </a>
-          </div>
-        </div>
-
-        <div className="hero-card" aria-label="BenDigitalClub status">
-          <span className="hero-card-dot" />
-          <span>Building in public</span>
-          <strong>01 / 2026</strong>
-        </div>
-      </section>
+      <Hero
+        eyebrow="BEN DIGITAL CLUB"
+        title="Build sharper ideas with better people."
+        description="A focused digital club for people creating meaningful products, brands, and experiences."
+        statusText="Building in public"
+        statusDate="01 / 2026"
+        primaryCTA="Join the club"
+        primaryHref="#join"
+        secondaryCTA="Learn more"
+        secondaryHref="#about"
+      />
 
       <Section id="about" eyebrow="ABOUT THE CLUB" title="Less noise. More momentum.">
         <p>
-          BenDigitalClub brings together thoughtful builders to share useful
-          ideas, honest feedback, and practical resources.
+          BenDigitalClub brings together thoughtful builders to share useful ideas, honest
+          feedback, and practical resources.
         </p>
       </Section>
 
@@ -43,9 +29,8 @@ export default function Page() {
         <div className="join-layout">
           <div>
             <p>
-              Follow the project as the club takes shape. Each release adds more
-              structure, sharper thinking, and more room for meaningful
-              collaboration.
+              Follow the project as the club takes shape. Each release adds more structure,
+              sharper thinking, and more room for meaningful collaboration.
             </p>
           </div>
 

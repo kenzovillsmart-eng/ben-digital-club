@@ -12,7 +12,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       styles.card,
       highlighted && styles.highlighted,
       className,
-    ].filter(Boolean).join(' ');
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>

@@ -18,7 +18,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       styles[`btn-${variant}`],
       styles[`size-${size}`],
       className,
-    ].filter(Boolean).join(' ');
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <button ref={ref} className={classes} {...props}>

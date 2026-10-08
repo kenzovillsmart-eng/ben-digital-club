@@ -14,7 +14,9 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       styles.badge,
       styles[`badge-${variant}`],
       className,
-    ].filter(Boolean).join(' ');
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <span ref={ref} className={classes} {...props}>
