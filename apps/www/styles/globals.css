@@ -3,9 +3,19 @@
   --surface: #14171c;
   --surface-2: #1b1f26;
   --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-accent: rgba(255, 91, 31, 0.35);
   --fg: #f5f1e8;
   --fg-muted: #a3a7b0;
   --accent: #ff5b1f;
+  --accent-soft: #ff7a4a;
+  --accent-glow: rgba(255, 91, 31, 0.45);
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-full: 999px;
 }
 
 * {
@@ -58,6 +68,7 @@ a {
 
 h1,
 h2,
+h3,
 p {
   margin-top: 0;
 }
@@ -100,7 +111,7 @@ h2 {
   min-height: 48px;
   padding: 0 20px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--r-full);
   font-weight: 700;
 }
 
@@ -148,6 +159,37 @@ h2 {
   border-top: 1px solid var(--border);
 }
 
+.join-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+}
+
+.feature-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
 @media (max-width: 760px) {
   .wrap {
     width: min(100% - 32px, 1180px);
@@ -162,49 +204,9 @@ h2 {
   .hero-card {
     min-height: 260px;
   }
-}
 
-.site-header {
-  position: absolute;
-  z-index: 10;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 24px 0;
-}
-
-.site-header-inner,
-.brand,
-.header-links {
-  display: flex;
-  align-items: center;
-}
-
-.site-header-inner {
-  justify-content: space-between;
-}
-
-.brand {
-  gap: 10px;
-  font-weight: 800;
-}
-
-.brand-mark {
-  display: grid;
-  width: 30px;
-  height: 30px;
-  place-items: center;
-  border-radius: 9px;
-  background: var(--accent);
-  color: #1a0d05;
-}
-
-.header-links {
-  gap: 24px;
-  color: var(--fg-muted);
-  font-size: 0.9rem;
-}
-
-.header-links a:hover {
-  color: var(--fg);
+  .join-layout,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
 }
