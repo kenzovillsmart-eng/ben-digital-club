@@ -15,7 +15,8 @@
     "build": "tsc && tsup src/index.ts --format esm,cjs",
     "build-storybook": "storybook build",
     "lint": "eslint src --ext .ts,.tsx",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'Tests not yet configured'"
   },
   "dependencies": {
     "@ben-digital-club/design-system": "workspace:*",
@@ -38,6 +39,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.0",
     "prettier": "^3.0.0",
+    "tsup": "^8.0.0",
     "typescript": "^5.2.0"
   }
 }
