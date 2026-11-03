@@ -1,0 +1,29 @@
+{
+  "name": "ben-digital-club",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@8.15.9",
+  "scripts": {
+    "dev": "pnpm --filter @ben-digital-club/www dev",
+    "lint": "pnpm --filter @ben-digital-club/ui lint",
+    "typecheck": "pnpm --filter @ben-digital-club/ui type-check && pnpm --filter @ben-digital-club/www typecheck",
+    "build": "pnpm --filter @ben-digital-club/ui build && pnpm --filter @ben-digital-club/www build",
+    "test": "pnpm test:unit && pnpm test:component",
+    "test:unit": "vitest run test/unit",
+    "test:component": "vitest run packages/ui/__tests__",
+    "test:e2e": "playwright test",
+    "audit:a11y": "playwright test e2e/accessibility.spec.ts",
+    "audit:lighthouse": "lhci autorun"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.3",
+    "@lhci/cli": "^0.14.0",
+    "@playwright/test": "^1.51.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.9"
+  }
+}
