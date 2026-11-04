@@ -37,4 +37,53 @@
     "audit:a11y": "playwright test e2e/accessibility.spec.ts",
     "audit:lighthouse": "lhci autorun"
   }
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./test/setup.ts'],
+    include: [
+      'test/unit/**/*.test.{ts,tsx}',
+      'packages/ui/__tests__/**/*.test.{ts,tsx}',
+    ],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov', 'html'],
+      exclude: ['**/*.d.ts', '**/dist/**', '**/*.config.*'],
+    },
+  },
+});import '@testing-library/jest-dom/vitest';
+import { cleanup } from '@testing-library/react';
+import { afterEach } from 'vitest';
+
+afterEach(() => {
+  cleanup();
+});import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+
+function ExampleButton({
+  onClick,
+}: {
+  onClick: () => void;
+}) {
+  return <button onClick={onClick}>Continue</button>;
 }
+
+describe('ExampleButton', () => {
+  it('renders an accessible button and handles activation', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+
+    render(<ExampleButton onClick={onClick} />);
+
+    const button = screen.getByRole('button', { name: 'Continue' });
+    await user.click(button);
+
+    expect(onClick).toHaveBeenCalledOnce();
+  });
+});}
