@@ -26,4 +26,15 @@
     "jsdom": "^25.0.1",
     "vitest": "^2.1.9"
   }
+{
+  "scripts": {
+    "lint": "pnpm --filter @ben-digital-club/ui lint",
+    "typecheck": "pnpm --filter @ben-digital-club/ui type-check && pnpm --filter @ben-digital-club/www typecheck",
+    "build": "pnpm --filter @ben-digital-club/ui build && pnpm --filter @ben-digital-club/www build",
+    "test:unit": "vitest run test/unit",
+    "test:component": "vitest run packages/ui/__tests__",
+    "test:e2e": "playwright test",
+    "audit:a11y": "playwright test e2e/accessibility.spec.ts",
+    "audit:lighthouse": "lhci autorun"
+  }
 }
